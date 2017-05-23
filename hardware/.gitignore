@@ -1,0 +1,7 @@
+# Ignore everything
+*
+# Except the following:
+!.gitignore
+!HotPotato.brd
+!HotPotato.sch
+!README.md
