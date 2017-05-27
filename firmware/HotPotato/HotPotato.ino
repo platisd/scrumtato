@@ -76,7 +76,7 @@ ISR(WDT_vect) {
 */
 ISR (PCINT0_vect) {
   // TO-DO: Investigate ways to debounce the button
-  if (digitalRead(BUTTON_PIN) == HIGH) {
+  if (digitalRead(BUTTON_PIN) == LOW) {
     buttonPressed = true;
   }
 }
