@@ -2,20 +2,8 @@
 #include <avr/power.h>
 #include <avr/wdt.h>
 
-const unsigned int BUZZER_PIN = PB0;
-const unsigned int MOTOR_PIN = PB1;
-const unsigned int BUTTON_PIN = PB2;
-const unsigned int ACCELEROMETER_IN = PB3;
-const unsigned int ACCELEROMETER_POWER = PB4;
-const unsigned long DEBOUNCE_TIME = 50;
-
-volatile bool watchDogBarked = false;
-bool watchDogEnabled = false;
-
-volatile bool buttonPressed = false;
-
 enum WatchDogTimeout {
-  WDT_16ms,
+  WDT_16ms = 0,
   WDT_32ms,
   WDT_64ms,
   WDT_128ms,
@@ -28,11 +16,89 @@ enum WatchDogTimeout {
 };
 
 enum PowerState {
-  SLEEP,
+  DEEP_SLEEP,
   GAME
 };
 
-PowerState currentState = SLEEP; // Start with sleep as the initial state
+const unsigned int BUZZER_PIN = PB0;
+const unsigned int MOTOR_PIN = PB1;
+const unsigned int BUTTON_PIN = PB2;
+const unsigned int ACCELEROMETER_IN = PB3;
+const unsigned int ACCELEROMETER_POWER = PB4;
+
+const unsigned long TURN_DURATION = 90000; // The time in milliseconds that game lasts
+const float beepingRatio = 0.95; // Percentage of the remaining time that should we beep
+unsigned long timeToBeep = (float) TURN_DURATION * beepingRatio;
+volatile bool watchDogBarked = false;
+bool watchDogEnabled = false;
+const WatchDogTimeout gameWdt = WDT_128ms;
+
+
+WatchDogTimeout currentWdt = gameWdt;
+unsigned long elapsedTime = 0; // How much time has elapsed in the running turn in milliseconds
+
+volatile bool buttonPressed = false;
+
+const unsigned long remindBeepDuration = 50; // How long in milliseconds we should beep to "stress" the user
+
+
+PowerState currentState = DEEP_SLEEP; // Start with sleep as the initial state
+
+/**
+   Vibrate for the specified amount of time (blocking)
+   @param duration milliseconds the motor will vibrate
+*/
+void vibrateFor(unsigned long duration) {
+  startVibrating();
+  delay(duration);
+  stopVibrating();
+}
+
+/**
+   Utility method that starts the vibrating motor
+*/
+void startVibrating() {
+  digitalWrite(MOTOR_PIN, HIGH);
+}
+
+/**
+   Utility method that stops the vibrating motor
+*/
+void stopVibrating() {
+  digitalWrite(MOTOR_PIN, LOW);
+}
+
+/**
+   Ring the buzzer for the specified amount of time (blocking)
+   @param duration milliseconds the buzzer will ring
+*/
+void ringFor(unsigned long duration) {
+  startRinging();
+  delay(duration);
+  stopRinging();
+}
+
+/**
+   Utility method that starts ringing the buzzer
+*/
+void startRinging() {
+  digitalWrite(BUZZER_PIN, HIGH);
+}
+
+/**
+   Utility method that stops ringing the buzzer
+*/
+void stopRinging() {
+  digitalWrite(BUZZER_PIN, LOW);
+}
+
+/**
+   A utility method to derive a watchdog timeout's duration
+   @return the amount of milliseconds corresponding to a watchdog timeout
+*/
+unsigned long getTimeoutDuration() {
+  return 1 << (currentWdt + 4);
+}
 
 void setupWatchDogTimeoutOneshot(WatchDogTimeout wdt) {
   // Adopted from InsideGadgets (www.insidegadgets.com)
@@ -47,6 +113,7 @@ void setupWatchDogTimeoutOneshot(WatchDogTimeout wdt) {
   WDTCR = timeoutVal;
   WDTCR |= _BV(WDIE);
   wdt_reset();  // pat the dog
+  currentWdt = wdt;
 }
 
 /**
@@ -93,7 +160,7 @@ void setupChangeInterrupt() {
 /**
    Sets the MCU into a deep sleep state until a change interrupt is triggered
 */
-void goToDeepSleep() {
+void goToSleep() {
   set_sleep_mode(SLEEP_MODE_PWR_DOWN);
   ADCSRA = 0; // turn off ADC
   power_all_disable (); // power off ADC, Timer 0 and 1, serial interface
@@ -114,35 +181,57 @@ void setup() {
 
 void loop() {
   switch (currentState) {
-    case SLEEP:
-      turnAccelerometerOff();
+    case DEEP_SLEEP:
       // Go to deep sleep until an interrupt occurs
-      goToDeepSleep();
+      goToSleep();
       // Proceed to the
       if (buttonPressed) {
+        // Beep fast twice to indicate the beginning of a game
+        ringFor(100);
+        delay(100);
+        ringFor(100);
         currentState = GAME;
         buttonPressed = false;
       }
       break;
     case GAME:
-      // If watchdog is not enabled, then we just arrived from SLEEP state
+      // If watchdog is not enabled, then we either just arrived from SLEEP state
+      // or from a watchdog bark. Therefore we need to set another watchdog timer.
       if (!watchDogEnabled) {
-        turnAccelerometerOn();
         // Set up watchdog to be triggered (once) after the specified time
-        setupWatchDogTimeoutOneshot(WDT_1sec);
+        setupWatchDogTimeoutOneshot(gameWdt);
         watchDogEnabled = true;
-        digitalWrite(BUZZER_PIN, HIGH);
       }
       // Go to deep sleep until an interrupt occurs
-      goToDeepSleep();
+      goToSleep();
       // We might have gone out of sleep due to another interrupt (i.e. the switch)
-      // So make sure that we only get out of this state using the watchdog
+      // So make sure that we know what we are doing depending on who interrupted our sleep
       if (watchDogBarked) {
-        digitalWrite(BUZZER_PIN, LOW);
-        currentState = SLEEP;
         watchDogBarked = false;
         watchDogEnabled = false;
+        elapsedTime += getTimeoutDuration();
+        unsigned long remainingTime = TURN_DURATION - elapsedTime;
+        /* --- Main game logic --- */
+        if (elapsedTime >= TURN_DURATION) {
+          // Play a sound and vibration sequence to indicate the end of a game due to timeout
+          ringFor(50);
+          delay(50);
+          ringFor(50);
+          delay(50);
+          startVibrating();
+          ringFor(800);
+          stopVibrating();
+          currentState = DEEP_SLEEP;
+          elapsedTime = 0;
+          timeToBeep = TURN_DURATION * beepingRatio; // reset the remaining time since the turn is over
+        } else if (remainingTime <= timeToBeep) {
+          // Ring when we reach half of the remaining time available
+          ringFor(remindBeepDuration);
+          elapsedTime += remindBeepDuration; // Add the time we spent ringing
+          timeToBeep *= beepingRatio;
+        }
       }
+      buttonPressed = false;
       break;
     default:
       break;
