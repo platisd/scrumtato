@@ -26,7 +26,8 @@ const unsigned int BUTTON_PIN = PB2;
 const unsigned int ACCELEROMETER_IN = PB3;
 const unsigned int ACCELEROMETER_POWER = PB4;
 
-const unsigned long TURN_DURATION = 2 * 60 * 1000; // The time in milliseconds that each person can talk
+const unsigned long TURN_DURATION = 120000; // The time in milliseconds that each person can talk
+unsigned long halfOfRemainingTime = TURN_DURATION / 2;
 volatile bool watchDogBarked = false;
 bool watchDogEnabled = false;
 const WatchDogTimeout gameWdt = WDT_1sec;
@@ -92,7 +93,7 @@ void stopRinging() {
    A utility method to derive a watchdog timeout's duration
    @return the amount of milliseconds corresponding to a watchdog timeout
 */
-unsigned int getTimeoutDuration() {
+unsigned long getTimeoutDuration() {
   return 1 << (currentWdt + 4);
 }
 
@@ -206,7 +207,8 @@ void loop() {
         watchDogBarked = false;
         watchDogEnabled = false;
         elapsedTime += getTimeoutDuration();
-        // Main game logic to follow
+        unsigned long remainingTime = TURN_DURATION - elapsedTime;
+        /* --- Main game logic --- */
         if (elapsedTime >= TURN_DURATION) {
           // Play a sound and vibration sequence to indicate the end of a game due to timeout
           ringFor(100);
@@ -218,6 +220,11 @@ void loop() {
           stopVibrating();
           currentState = DEEP_SLEEP;
           elapsedTime = 0;
+          halfOfRemainingTime = TURN_DURATION / 2; // reset the remaining time since the turn is over
+        } else if (remainingTime <= halfOfRemainingTime) {
+          // Ring when we reach half of the remaining time available
+          ringFor(150);
+          halfOfRemainingTime /= 2;
         }
       }
       if (buttonPressed) {
@@ -237,6 +244,7 @@ void loop() {
           watchDogBarked = false;
           watchDogEnabled = false;
           elapsedTime = 0;
+          halfOfRemainingTime = TURN_DURATION / 2; // reset the remaining time since the turn is over
           // Go back to the sleep state
           currentState = DEEP_SLEEP;
         }
