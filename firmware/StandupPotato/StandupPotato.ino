@@ -31,13 +31,13 @@ unsigned long halfOfRemainingTime = TURN_DURATION / 2;
 volatile bool watchDogBarked = false;
 bool watchDogEnabled = false;
 const WatchDogTimeout gameWdt = WDT_1sec;
-const WatchDogTimeout buzzerWdt = WDT_128ms;
-const WatchDogTimeout motorWdt = WDT_500ms;
 
 WatchDogTimeout currentWdt = gameWdt;
 unsigned long elapsedTime = 0; // How much time has elapsed in the running turn in milliseconds
 
 volatile bool buttonPressed = false;
+
+const unsigned long remindBeepDuration = 150; // How long in milliseconds we should beep to "stress" the user
 
 PowerState currentState = DEEP_SLEEP; // Start with sleep as the initial state
 
@@ -223,7 +223,8 @@ void loop() {
           halfOfRemainingTime = TURN_DURATION / 2; // reset the remaining time since the turn is over
         } else if (remainingTime <= halfOfRemainingTime) {
           // Ring when we reach half of the remaining time available
-          ringFor(150);
+          ringFor(remindBeepDuration);
+          elapsedTime += remindBeepDuration; // Add the time we spent ringing
           halfOfRemainingTime /= 2;
         }
       }
