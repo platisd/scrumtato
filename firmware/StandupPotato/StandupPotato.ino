@@ -26,7 +26,7 @@ const unsigned int BUTTON_PIN = PB2;
 const unsigned int ACCELEROMETER_IN = PB3;
 const unsigned int ACCELEROMETER_POWER = PB4;
 
-const unsigned long TURN_DURATION = 90000; // The time in milliseconds that each person can talk
+const unsigned long TURN_DURATION = 60000; // The time in milliseconds that each person can talk
 unsigned long halfOfRemainingTime = TURN_DURATION / 2;
 volatile bool watchDogBarked = false;
 bool watchDogEnabled = false;
