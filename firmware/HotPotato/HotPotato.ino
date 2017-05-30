@@ -26,12 +26,13 @@ const unsigned int BUTTON_PIN = PB2;
 const unsigned int ACCELEROMETER_IN = PB3;
 const unsigned int ACCELEROMETER_POWER = PB4;
 
-const unsigned long TURN_DURATION = 90000; // The time in milliseconds that game lasts
+const unsigned long DEFAULT_TURN_DURATION = 60000; // The time in milliseconds that game lasts
+unsigned long turnDuration = DEFAULT_TURN_DURATION;
 const float beepingRatio = 0.95; // Percentage of the remaining time that should we beep
-unsigned long timeToBeep = (float) TURN_DURATION * beepingRatio;
+unsigned long timeToBeep = (float) DEFAULT_TURN_DURATION * beepingRatio;
 volatile bool watchDogBarked = false;
 bool watchDogEnabled = false;
-const WatchDogTimeout gameWdt = WDT_128ms;
+const WatchDogTimeout gameWdt = WDT_128ms; // The game interval
 
 
 WatchDogTimeout currentWdt = gameWdt;
@@ -41,6 +42,14 @@ volatile bool buttonPressed = false;
 
 const unsigned long remindBeepDuration = 50; // How long in milliseconds we should beep to "stress" the user
 
+const unsigned long TIME_TO_PASS_THE_BALL = 3000; // How long in milliseconds the player has in order to pass the ball after immobility is detected
+const unsigned int ACC_THRESHOLD = 80; // The threshold (of analogRead values) over which we register a "movement" (experimentally determined)
+const unsigned int IMMOBILITY_THRESHOLD = 20; // The threshold of the amount of times the analogRead values were below the acceleration threshold
+unsigned int prevAccReading = 0; // The last reading by the accelerometer. We start it by 0 but it should not practically make a big differnece
+unsigned int immobilityCounter = 0;
+bool fastCountdownMode = false;
+
+uint8_t enabledADCSRA = 0; // Will hold the initial ADCSRA value
 
 PowerState currentState = DEEP_SLEEP; // Start with sleep as the initial state
 
@@ -162,8 +171,11 @@ void setupChangeInterrupt() {
 */
 void goToSleep() {
   set_sleep_mode(SLEEP_MODE_PWR_DOWN);
-  ADCSRA = 0; // turn off ADC
-  power_all_disable (); // power off ADC, Timer 0 and 1, serial interface
+  // Disable ADC when we are in deep sleep state, otherwise have it on
+  // We are missing the first analogRead in the game state this way, but we can afford
+  // it for the sake of code simplicity
+  ADCSRA = currentState == DEEP_SLEEP ? 0 : enabledADCSRA;
+  power_all_disable(); // power off ADC, Timer 0 and 1, serial interface
   sleep_enable();
   sleep_cpu(); // Sleep here and wait for the interrupt
   sleep_disable();
@@ -171,11 +183,14 @@ void goToSleep() {
 }
 
 void setup() {
+  // Set up the I/O pins
   pinMode(BUZZER_PIN, OUTPUT);
   pinMode(MOTOR_PIN, OUTPUT);
   pinMode(BUTTON_PIN, INPUT);
   pinMode(ACCELEROMETER_IN, INPUT);
   pinMode(ACCELEROMETER_POWER, OUTPUT);
+  // Log down the value of ADCSRA in order to restore it when necessary
+  enabledADCSRA = ADCSRA;
   setupChangeInterrupt();
 }
 
@@ -192,6 +207,7 @@ void loop() {
         ringFor(100);
         currentState = GAME;
         buttonPressed = false;
+        turnAccelerometerOn();
       }
       break;
     case GAME:
@@ -210,9 +226,9 @@ void loop() {
         watchDogBarked = false;
         watchDogEnabled = false;
         elapsedTime += getTimeoutDuration();
-        unsigned long remainingTime = TURN_DURATION - elapsedTime;
+        unsigned long remainingTime = turnDuration - elapsedTime;
         /* --- Main game logic --- */
-        if (elapsedTime >= TURN_DURATION) {
+        if (elapsedTime >= turnDuration) { // End of game
           // Play a sound and vibration sequence to indicate the end of a game due to timeout
           ringFor(50);
           delay(50);
@@ -223,12 +239,46 @@ void loop() {
           stopVibrating();
           currentState = DEEP_SLEEP;
           elapsedTime = 0;
-          timeToBeep = TURN_DURATION * beepingRatio; // reset the remaining time since the turn is over
-        } else if (remainingTime <= timeToBeep) {
+          turnDuration = DEFAULT_TURN_DURATION; // Reset the turn duration that might have been changed
+          timeToBeep = turnDuration * beepingRatio; // reset the remaining time since the turn is over
+          immobilityCounter = 0;
+          fastCountdownMode = false;
+          turnAccelerometerOff();
+        } else if (remainingTime <= timeToBeep) { // Time to beep
           // Ring when we reach half of the remaining time available
           ringFor(remindBeepDuration);
           elapsedTime += remindBeepDuration; // Add the time we spent ringing
           timeToBeep *= beepingRatio;
+        }
+        // We need to detect if a player is holding the ball for too long in order to start a fast countdown
+        // If the ball is not moved during the designated time to pass the ball, then the game ends prematurely
+        unsigned int currentAccReading = analogRead(ACCELEROMETER_IN);
+        int accDelta = currentAccReading - prevAccReading;
+        prevAccReading = currentAccReading;
+        // If the ball has not been moved enough (i.e. thrown)
+        if (abs(accDelta) <= ACC_THRESHOLD) {
+          // Register a touch and check if the ball has been held for too long
+          if (++immobilityCounter >= IMMOBILITY_THRESHOLD) {
+            // If we are not already in fast countdown mode, start the fast countdown
+            if (!fastCountdownMode) {
+              unsigned long decreasedTurnDuration = elapsedTime + TIME_TO_PASS_THE_BALL;
+              // Go into fast countodown only if the decreased turn duration is actually after when the game
+              // is supposed to finish. In that case do not adjust the time so the users do not cheat by prolonging the game
+              if (decreasedTurnDuration <= DEFAULT_TURN_DURATION) { // If the turn duration is actually decreased and not extended
+                turnDuration = decreasedTurnDuration;
+                fastCountdownMode = true;
+              }
+            }
+          }
+        } else {
+          // Restore the counter if there was a movement but only restore the duration and time to beep
+          // if we just were in fast countdown mode
+          immobilityCounter = 0;
+          if (fastCountdownMode) {
+            turnDuration = DEFAULT_TURN_DURATION;
+            timeToBeep = (turnDuration - elapsedTime) * beepingRatio;
+            fastCountdownMode = false;
+          }
         }
       }
       buttonPressed = false;
