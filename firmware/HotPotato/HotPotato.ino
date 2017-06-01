@@ -28,7 +28,7 @@ const unsigned int ACCELEROMETER_POWER = PB4;
 
 const unsigned long DEFAULT_TURN_DURATION = 60000; // The time in milliseconds that game lasts
 unsigned long turnDuration = DEFAULT_TURN_DURATION;
-const float beepingRatio = 0.95; // Percentage of the remaining time that should we beep
+const float beepingRatio = 0.95; // Percentage of the remaining time that should we beep. Controls how often we will beep
 unsigned long timeToBeep = (float) DEFAULT_TURN_DURATION * beepingRatio;
 volatile bool watchDogBarked = false;
 bool watchDogEnabled = false;
@@ -42,9 +42,15 @@ volatile bool buttonPressed = false;
 
 const unsigned long remindBeepDuration = 50; // How long in milliseconds we should beep to "stress" the user
 
-const unsigned long TIME_TO_PASS_THE_BALL = 3000; // How long in milliseconds the player has in order to pass the ball after immobility is detected
-const unsigned int ACC_THRESHOLD = 80; // The threshold (of analogRead values) over which we register a "movement" (experimentally determined)
-const unsigned int IMMOBILITY_THRESHOLD = 20; // The threshold of the amount of times the analogRead values were below the acceleration threshold
+// How long in milliseconds the player has in order to pass the ball after immobility is detected
+const unsigned long TIME_TO_PASS_THE_BALL = 2000;
+// The threshold (of difference between analogRead values from the accelerometer) over which we register a "movement" (experimentally determined)
+// The lower it is, the easier a movement is registered. Or alternatively, the higher it is, the easier immobility is detected.
+const unsigned int ACC_THRESHOLD = 80;
+// The threshold of the amount of times the analogRead values were below the acceleration threshold.
+// Alternatively, how long the ball should stay relatively still in order for the fast count down mode to kick in
+// In time, this translates into IMMOBILITY_THRESHOLD * watchdog timeout period
+const unsigned int IMMOBILITY_THRESHOLD = 20;
 unsigned int prevAccReading = 0; // The last reading by the accelerometer. We start it by 0 but it should not practically make a big differnece
 unsigned int immobilityCounter = 0;
 bool fastCountdownMode = false;
@@ -230,11 +236,11 @@ void loop() {
         /* --- Main game logic --- */
         if (elapsedTime >= turnDuration) { // End of game
           // Play a sound and vibration sequence to indicate the end of a game due to timeout
-          ringFor(50);
-          delay(50);
-          ringFor(50);
-          delay(50);
           startVibrating();
+          ringFor(50);
+          delay(50);
+          ringFor(50);
+          delay(50);
           ringFor(800);
           stopVibrating();
           currentState = DEEP_SLEEP;
