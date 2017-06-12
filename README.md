@@ -32,13 +32,14 @@ Depending on the how you use Scrumtato, different case should be utilized. When 
 ### Components
 * **[Scrumtato PCB](hardware/)** - You can also [order it from OSH Park](https://oshpark.com/shared_projects/IlETBDKz)
 * **Four M3x10 flat head screws** - To mount the board. Longer ones (until M3x40) will also work.
-* **Two M3x20 flag head screws** - To keep the upper and bottom part of the case together. Longer ones (until M3x40) will also work. **Only for the toy/flexible version!**
+* **Two M3x20 flat head screws** - To keep the upper and bottom part of the case together. Longer ones (until M3x40) will also work. **Only for the toy/flexible version!**
 * **CR2032 battery** - To power everything up
 * **CR2032 battery holder** - To keep the battery in place. Get the through-hole version.
 * **ATtiny85-20PU** - If you only want to use it during stand-up meetings, then an **ATtiny25-20PU** will suffice.
 * **DIP-8 socket** - Optional, but will probably make your life easier if you need to remove the microcontroller.
-* **GY-61 accelerometer module** - Based on the ADXL335 chip
-* **5-pin header** - Optional, but will probably make your life easier if you use an accelerometer and need to remove it.
+* **GY-61 accelerometer module** - Based on the ADXL335 chip. Try to get one that has its pins unsoldered.
+* **5-pin angled male header** - Optional, unless you use an accelerometer which needs to be placed vertically relative to the board.
+* **5-pin female header** - Optional, unless you use an accelerometer and need to remove it.
 * **9mm Buzzer** - They are not the most common but take up less space. I might consider replacing them in the future with something easier to source.
 * **22Ω 1206 resistor** - Used for the buzzer. Other low valued resistors will probably work as well.
 * **SMD vibrating motor** - To make Scrumtato vibrate. The board is modeled after Sanyo NRS-2574 but all other models that fit the dimensions will work.
@@ -48,3 +49,6 @@ Depending on the how you use Scrumtato, different case should be utilized. When 
 * **BC547 NPN transistor** - To control the vibration motor.
 * **1KΩ 1206 resistor** - To drive the transistor.
 * **Two 10KΩ 1206 resistors** - Used as pull ups. One for the microcontroller's reset pin and the other for the tactile switch.
+
+## Articles
+[Scrumtato: Make daily stand-ups agile again](https://platis.solutions/blog/2017/06/12/scrumtato-make-daily-stand-ups-agile-again/)
