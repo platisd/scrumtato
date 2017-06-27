@@ -44,7 +44,8 @@ Depending on the how you use Scrumtato, different case should be utilized. When 
 * **22Ω 1206 resistor** - Used for the buzzer. Other low valued resistors will probably work as well.
 * **SMD vibrating motor** - To make Scrumtato vibrate. The board is modeled after Sanyo NRS-2574 but all other models that fit the dimensions will work.
 * **4-pin tactile switch** - To initiate (or finish occasionally) the game. Get the through-hole version.
-* **LED 1206** - Optional and rather unnecessary when using the flexible version since it is not visible.
+* **2-pin angled switch** - As a reset button. Through-hole component.
+* **LED 5mm** - Optional and rather unnecessary when using the flexible version since it is not visible.
 * **220Ω 1206 resistor** - Optional unless the LED is used.
 * **BC547 NPN transistor** - To control the vibration motor.
 * **1KΩ 1206 resistor** - To drive the transistor.
