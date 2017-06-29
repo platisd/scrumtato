@@ -7,7 +7,15 @@ During our daily stand-up meetings (SCRUM), as we are a team full of talented an
 ![scrumtatos](https://platis.solutions/blog/wp-content/uploads/2017/06/scrumtato_featured.jpg)
 
 ## How does it work
-Operating the Scrumtato is simple. The user presses the on-board button and starts talking about all the extraordinary things they got into since the last daily stand-up. This initiates a countdown timer that lasts as long as each team member is supposed to speak. To indicate that half of the remaining time has just been depleted, Scrumtato will beep once. For example, if the total available period for someone to speak is 1 minute, the user will hear beeps on approximately the 30th, 45th, 52nd, 56th, 58th and 59th seconds. As soon as the time is up, a characteristic beep sequence is played and Scrumato vibrates. In other words, Scrumtato can be considered as a stress ball that... actually stresses you out. :laughing: If the team member finishes talking in a timely manner, then they merely need to press the button again and a sound sequence that indicates the successful end of a turn is played.
+Operating the Scrumtato is simple!
+1. Press the button when you are ready to talk. You will hear 2 beeps.
+2. Start talking. You have to concisely explain what you did since the last meeting and what you are planning to do until the next.
+3. If you finish before the time runs out (in which case the Scrumtato will beep and vibrate), press the button again. You will hear 3 beeps.
+
+### More details
+The user begins interacting with the Scrumtato by pressing the on-board button and starts talking about all the extraordinary things they got into since the last daily stand-up. This initiates a countdown timer that lasts as long as each team member is supposed to speak. To indicate that half of the remaining time has just been depleted, Scrumtato will beep once. For example, if the total available period for someone to speak is 1 minute, the user will hear beeps on approximately the 30th, 45th, 52nd, 56th, 58th and 59th seconds. As soon as the time is up, a characteristic beep sequence is played and Scrumato vibrates.
+
+In other words, Scrumtato can be considered as a stress ball that... actually stresses you out! If the team member finishes talking in a timely manner, then they merely need to press the button again and a sound sequence that indicates the successful end of a turn is played.
 
 From a technical perspective, since the users should not have to change the battery often, the microcontroller will go to sleep as much as possible. That is between "games" and between beeps or vibrations during the "games". In the former case, the microcontroller is woken up by the button press and in the latter by a watchdog timer.
 
