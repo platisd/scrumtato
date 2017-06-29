@@ -30,7 +30,7 @@ Depending on the how you use Scrumtato, different case should be utilized. When 
 * [Scrumtato Flex version](physibles/flex) - To be used as a toy for kids.
 
 ### Components
-* **[Scrumtato PCB](hardware/)** - You can also [order it from OSH Park](https://oshpark.com/shared_projects/IlETBDKz)
+* **[Scrumtato PCB](hardware/)** - You can also [order it from OSH Park](https://oshpark.com/shared_projects/GQ4w7Qkz) or [Seeed Studio](https://www.seeedstudio.com/Scrumtato-Make-daily-stand-ups-agile-again-g-1012504)
 * **Four M3x10 flat head screws** - To mount the board. Longer ones (until M3x40) will also work.
 * **Two M3x20 flat head screws** - To keep the upper and bottom part of the case together. Longer ones (until M3x40) will also work. **Only for the toy/flexible version!**
 * **CR2032 battery** - To power everything up
