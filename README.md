@@ -1,8 +1,10 @@
 # Scrumtato
-An ATtiny85 gadget to make daily stand-ups agile again. The name stems from the combination of [SCRUM](https://en.wikipedia.org/wiki/Scrum_(software_development)) and [Hot Potato](https://en.wikipedia.org/wiki/Hot_potato_(game)).
+Scrumtato is an ATtiny85-based gadget to keep overly passionate developers from excessively talking during daily stand-up meetings. The name stems from the combination of [SCRUM](https://en.wikipedia.org/wiki/Scrum_(software_development)) and [Hot Potato](https://en.wikipedia.org/wiki/Hot_potato_(game)).
 
 ## About Scrumtato
 During our daily stand-up meetings (SCRUM), as we are a team full of talented and passionate developers, we just love to talk too much. This stretches our meeting and keeps us from getting the most out of our working hours. To solve this problem, here comes **Scrumtato: A gadget to make daily stand-ups agile again!**
+
+![scrumtatos](https://platis.solutions/blog/wp-content/uploads/2017/06/scrumtato_featured.jpg)
 
 ## How does it work
 Operating the Scrumtato is simple. The user presses the on-board button and starts talking about all the extraordinary things they got into since the last daily stand-up. This initiates a countdown timer that lasts as long as each team member is supposed to speak. To indicate that half of the remaining time has just been depleted, Scrumtato will beep once. For example, if the total available period for someone to speak is 1 minute, the user will hear beeps on approximately the 30th, 45th, 52nd, 56th, 58th and 59th seconds. As soon as the time is up, a characteristic beep sequence is played and Scrumato vibrates. In other words, Scrumtato can be considered as a stress ball that... actually stresses you out. :laughing: If the team member finishes talking in a timely manner, then they merely need to press the button again and a sound sequence that indicates the successful end of a turn is played.
