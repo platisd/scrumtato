@@ -33,6 +33,9 @@ The use cases supported by Scrumtato can be found in the [firmware](firmware/) d
 ## Hardware
 From a physical perspective, Scrumtato is comprised of a PCB and a 3D-printed case to protect the electronics as well as make passing around easier and more fun.
 
+### PCB
+The printed circuit board was designed with [Eagle CAD](https://www.autodesk.com/products/eagle/overview) and the latest `rev. 1` boards were fabricated by [Seeed Fusion](https://www.seeedstudio.com/fusion_pcb.html) and their [2 layer DRU](http://www.seeedstudio.com/document/rar/Seeed_Gerber_Generater_2-layer.zip) to produce the Gerber files. Using the above service you can preview your board, as well as any changes you made, before ordering it and have it nicely packaged and delivered to your address in just a week.
+
 ### 3D printed cases
 Depending on the how you use Scrumtato, different case should be utilized. When used as a stand-up meeting gadget, it is *probably* not going to be thrown around. Therefore a case from common PLA plastic will work just fine. However, if kids come into the equation a flexible case is strongly suggested, since the gadget will be mishandled and dropped on the floor. After all, this is part of the fun. The flexible version was printed with a [ZYYX+ printer](http://www.zyyx3dprinter.com/), using their proFLEX filament. The PLA version was printed with a [Micro M3D printer](https://printm3d.com/themicro/). The models were sliced with Simplify3D. If you need more information on the specific Simplify3D profiles used, tips on how to print (e.g. when to use support etc) or the source of the models, please contact me.
 
