@@ -25,10 +25,10 @@ Scrumtato was initially conceived as a toy for kids (or grown ups, no judging) a
 Specifically, the watchdog timer is triggered faster and the buzzer beeps when 5% of the remaining time is depleted, therefore more frequently compared to the stand-up scenario. Additionally, the on-board analog accelerometer is utilized to determine if a player does not pass the ball fast enough. In that case, a faster countdown is initiated and the ball must be passed in a couple of seconds otherwise it "explodes" in the hands of the one that was delaying the game. This increases the suspense and the pace of the game.
 
 ## Software
-The use cases supported by Scrumtato can be found in the [firmware](firmware/) directory.
+The use cases supported by Scrumtato can be found in the [firmware](https://github.com/platisd/scrumtato/tree/master/firmware) directory.
 
-* [Standup Potato](firmware/StandupPotato/): The way to make daily stand-ups agile again
-* [Hot Potato](firmware/HotPotato/): A modern and suspenseful take on the classic Hot Potato game
+* [Standup Potato](https://github.com/platisd/scrumtato/tree/master/firmware/StandupPotato): The way to make daily stand-ups agile again
+* [Hot Potato](https://github.com/platisd/scrumtato/tree/master/firmware/HotPotato): A modern and suspenseful take on the classic Hot Potato game
 
 ## Hardware
 From a physical perspective, Scrumtato is comprised of a PCB and a 3D-printed case to protect the electronics as well as make passing around easier and more fun.
@@ -39,8 +39,8 @@ The printed circuit board was designed with [Eagle CAD](https://www.autodesk.com
 ### 3D printed cases
 Depending on the how you use Scrumtato, different case should be utilized. When used as a stand-up meeting gadget, it is *probably* not going to be thrown around. Therefore a case from common PLA plastic will work just fine. However, if kids come into the equation a flexible case is strongly suggested, since the gadget will be mishandled and dropped on the floor. After all, this is part of the fun. The flexible version was printed with a [ZYYX+ printer](http://www.zyyx3dprinter.com/), using their proFLEX filament. The PLA version was printed with a [Micro M3D printer](https://printm3d.com/themicro/). The models were sliced with Simplify3D. If you need more information on the specific Simplify3D profiles used, tips on how to print (e.g. when to use support etc) or the source of the models, please contact me.
 
-* [Scrumtato PLA version](physibles/pla) - To be used during the daily stand-up meetings.
-* [Scrumtato Flex version](physibles/flex) - To be used as a toy for kids.
+* [Scrumtato PLA version](https://github.com/platisd/scrumtato/tree/master/physibles/pla) - To be used during the daily stand-up meetings.
+* [Scrumtato Flex version](https://github.com/platisd/scrumtato/tree/master/physibles/flex) - To be used as a toy for kids.
 
 ### Components
 * **[Scrumtato PCB](hardware/)** - You can also [order it from OSH Park](https://oshpark.com/shared_projects/GQ4w7Qkz) or [Seeed Studio](https://www.seeedstudio.com/Scrumtato-Make-daily-stand-ups-agile-again-g-1012504)
