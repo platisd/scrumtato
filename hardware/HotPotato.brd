@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="8.1.1">
+<eagle version="8.3.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
+<setting keepoldvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
 <grid distance="0.25" unitdist="mm" unit="mm" style="lines" multiple="1" display="no" altdistance="0.025" altunitdist="inch" altunit="inch"/>
@@ -179,9 +180,10 @@
 <text x="83.9" y="40.5" size="0.8128" layer="21" font="vector">GND</text>
 <text x="72.65" y="42.9" size="0.8128" layer="21" font="vector">ACC_X</text>
 <text x="102.7" y="52.8" size="1.9304" layer="22" font="vector" rot="MR0">Scrumtato</text>
-<text x="95.8" y="48.3" size="1.016" layer="22" font="vector" rot="MR0" align="bottom-center">rev. 1
+<text x="95.8" y="48.3" size="1.016" layer="22" font="vector" rot="MR0" align="bottom-center">rev. 2
 designed by
 Dimitris Platis</text>
+<text x="74.25" y="50" size="0.8128" layer="21" font="vector" rot="R225">BUZZER</text>
 </plain>
 <libraries>
 <library name="Itead_BP_110825.lbr">
@@ -198,7 +200,7 @@ Dimitris Platis</text>
 </package>
 </packages>
 </library>
-<library name="SparkFun-LED">
+<library name="SparkFun-LED" urn="urn:adsk.eagle:library:529">
 <description>&lt;h3&gt;SparkFun Electronics' preferred foot prints&lt;/h3&gt;
 In this library you'll find discrete LEDs for illumination or indication, but no displays.&lt;br&gt;&lt;br&gt;
 We've spent an enormous amount of time creating and checking these footprints and parts, but it is the end user's responsibility to ensure correctness and suitablity for a given componet or application. If you enjoy using this library, please buy one of our products at www.sparkfun.com.
@@ -207,24 +209,33 @@ We've spent an enormous amount of time creating and checking these footprints an
 &lt;br&gt;&lt;br&gt;
 You are welcome to use this library for commercial purposes. For attribution, we ask that when you begin to sell your device using our footprint, you email us with a link to the product being sold. We want bragging rights that we helped (in a very small part) to create your 8th world wonder. We would like the opportunity to feature your device on our homepage.</description>
 <packages>
-<package name="LED5MM-KIT">
-<description>&lt;h3&gt;LED5MM-KIT&lt;/h3&gt;
-5MM Through-hole LED&lt;br&gt;
-&lt;br&gt;
-&lt;b&gt;Warning:&lt;/b&gt; This is the KIT version of this package. This package has a smaller diameter top stop mask, which doesn't cover the diameter of the pad. This means only the bottom side of the pads' copper will be exposed. You'll only be able to solder to the bottom side.</description>
-<wire x1="2.54" y1="-1.905" x2="2.54" y2="1.905" width="0.2032" layer="21"/>
-<wire x1="2.54" y1="-1.905" x2="2.54" y2="1.905" width="0.254" layer="21" curve="-286.260205" cap="flat"/>
+<package name="LED_5MM-KIT" urn="urn:adsk.eagle:footprint:39311/1" library_version="1">
+<description>&lt;h3&gt;LED 5mm KIT PTH&lt;/h3&gt;
+&lt;p&gt;
+&lt;b&gt;Warning:&lt;/b&gt; This is the KIT version of this package. This package has a smaller diameter top stop mask, which doesn't cover the diameter of the pad. This means only the bottom side of the pads' copper will be exposed. You'll only be able to solder to the bottom side.&lt;/p&gt;
+
+&lt;p&gt;Specifications:
+&lt;ul&gt;&lt;li&gt;Pin count: 2&lt;/li&gt;
+&lt;li&gt;Pin pitch: 0.1inch&lt;/li&gt;
+&lt;li&gt;Diameter: 5mm&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;
+&lt;p&gt;Example Device:
+&lt;ul&gt;&lt;li&gt;LED&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;</description>
+<wire x1="2.54" y1="-1.905" x2="2.54" y2="1.905" width="0.2032" layer="22"/>
 <wire x1="-1.143" y1="0" x2="0" y2="1.143" width="0.1524" layer="51" curve="-90" cap="flat"/>
 <wire x1="0" y1="-1.143" x2="1.143" y2="0" width="0.1524" layer="51" curve="90" cap="flat"/>
 <wire x1="-1.651" y1="0" x2="0" y2="1.651" width="0.1524" layer="51" curve="-90" cap="flat"/>
 <wire x1="0" y1="-1.651" x2="1.651" y2="0" width="0.1524" layer="51" curve="90" cap="flat"/>
 <wire x1="-2.159" y1="0" x2="0" y2="2.159" width="0.1524" layer="51" curve="-90" cap="flat"/>
 <wire x1="0" y1="-2.159" x2="2.159" y2="0" width="0.1524" layer="51" curve="90" cap="flat"/>
-<circle x="0" y="0" radius="2.54" width="0.1524" layer="21"/>
+<wire x1="2.54" y1="-1.905" x2="2.54" y2="1.905" width="0.2032" layer="21"/>
+<wire x1="2.54" y1="-1.905" x2="2.54" y2="1.905" width="0.254" layer="21" curve="-286.260205" cap="flat"/>
+<wire x1="2.54" y1="-1.905" x2="2.54" y2="1.905" width="0.2032" layer="51"/>
 <pad name="A" x="-1.27" y="0" drill="0.8128" diameter="1.8796" stop="no"/>
 <pad name="K" x="1.27" y="0" drill="0.8128" diameter="1.8796" stop="no"/>
-<text x="3.175" y="0.5334" size="1.27" layer="25" ratio="10">&gt;NAME</text>
-<text x="3.2004" y="-1.8034" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<text x="0" y="3.3909" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center">&gt;NAME</text>
+<text x="0.0254" y="-3.3909" size="0.6096" layer="27" font="vector" ratio="20" align="top-center">&gt;VALUE</text>
 <polygon width="0.127" layer="30">
 <vertex x="-1.2675" y="-0.9525" curve="-90"/>
 <vertex x="-2.2224" y="-0.0228" curve="-90.011749"/>
@@ -249,8 +260,25 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <vertex x="1.27" y="0.447" curve="-90"/>
 <vertex x="1.7119" y="-0.0101" curve="-90.012967"/>
 </polygon>
+<circle x="0" y="0" radius="2.54" width="0.1524" layer="21"/>
 </package>
 </packages>
+<packages3d>
+<package3d name="LED_5MM-KIT" urn="urn:adsk.eagle:package:39357/1" type="box" library_version="1">
+<description>LED 5mm KIT PTH
+
+Warning: This is the KIT version of this package. This package has a smaller diameter top stop mask, which doesn't cover the diameter of the pad. This means only the bottom side of the pads' copper will be exposed. You'll only be able to solder to the bottom side.
+
+Specifications:
+Pin count: 2
+Pin pitch: 0.1inch
+Diameter: 5mm
+
+Example Device:
+LED
+</description>
+</package3d>
+</packages3d>
 </library>
 <library name="dhgoldberg">
 <packages>
@@ -263,11 +291,11 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <wire x1="7.8" y1="-2.4" x2="-7.535" y2="-2.4" width="0.127" layer="21"/>
 <wire x1="-7.535" y1="-2.4" x2="-7.535" y2="2.2" width="0.127" layer="21"/>
 </package>
-<package name="BUZZER-9MM-PTH">
-<pad name="P$1" x="-2" y="0" drill="0.9" diameter="1.7"/>
-<pad name="P$2" x="2" y="0" drill="0.9" diameter="1.7"/>
+<package name="BUZZER-9MM-PTH_NEW">
+<pad name="P$1" x="-2.762" y="0" drill="0.9" diameter="1.7"/>
+<pad name="P$2" x="2.762" y="0" drill="0.9" diameter="1.7"/>
 <circle x="0" y="0" radius="4.5" width="0.127" layer="21"/>
-<text x="-4.1" y="-0.6" size="1.27" layer="21">+</text>
+<text x="-3.211" y="1.432" size="1.27" layer="21">+</text>
 </package>
 </packages>
 </library>
@@ -369,7 +397,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </package>
 </packages>
 </library>
-<library name="SparkFun-DiscreteSemi">
+<library name="SparkFun-DiscreteSemi" urn="urn:adsk.eagle:library:514">
 <description>&lt;h3&gt;SparkFun Electronics' preferred foot prints&lt;/h3&gt;
 In this library you'll find discrete semiconductors- transistors, diodes, TRIACs, optoisolators, etc.&lt;br&gt;&lt;br&gt;
 We've spent an enormous amount of time creating and checking these footprints and parts, but it is the end user's responsibility to ensure correctness and suitablity for a given componet or application. If you enjoy using this library, please buy one of our products at www.sparkfun.com.
@@ -393,7 +421,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </package>
 </packages>
 </library>
-<library name="SparkFun-Connectors">
+<library name="SparkFun-Connectors" urn="urn:adsk.eagle:library:513">
 <description>&lt;h3&gt;SparkFun Electronics' preferred foot prints&lt;/h3&gt;
 In this library you'll find connectors and sockets- basically anything that can be plugged into or onto.&lt;br&gt;&lt;br&gt;
 We've spent an enormous amount of time creating and checking these footprints and parts, but it is the end user's responsibility to ensure correctness and suitablity for a given componet or application. If you enjoy using this library, please buy one of our products at www.sparkfun.com.
@@ -743,9 +771,9 @@ Please make sure your boards conform to these design rules.</description>
 <attribute name="NAME" x="82.33" y="60" size="0.8128" layer="25" ratio="10"/>
 <attribute name="VALUE" x="82.32" y="58.25" size="0.8128" layer="27" ratio="10"/>
 </element>
-<element name="D3" library="SparkFun-LED" package="LED5MM-KIT" value="" x="96.845" y="64.58" smashed="yes" rot="R270">
-<attribute name="NAME" x="92.281" y="65.992" size="0.8128" layer="25"/>
-<attribute name="VALUE" x="95.067" y="65.596" size="0.4064" layer="27" rot="R270"/>
+<element name="D3" library="SparkFun-LED" library_urn="urn:adsk.eagle:library:529" package="LED_5MM-KIT" package3d_urn="urn:adsk.eagle:package:39357/1" value="" x="96.345" y="64.58" smashed="yes" rot="R135">
+<attribute name="NAME" x="93.32066875" y="66.808803125" size="0.8128" layer="25" rot="R225"/>
+<attribute name="VALUE" x="98.32065625" y="65.118815625" size="0.4064" layer="27" rot="R135"/>
 </element>
 <element name="M1" library="dhgoldberg" package="SMT" value="SANYO_NRS-2574SMT" x="100.58" y="54.57" smashed="yes" rot="R270"/>
 <element name="R1" library="SparkFun-Passives" package="1206" value="1K" x="93.36" y="41.235" smashed="yes">
@@ -776,12 +804,11 @@ Please make sure your boards conform to these design rules.</description>
 <attribute name="PROD_ID" value="IC-09445" x="70.871975" y="56.441978125" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="VALUE" x="68.736975" y="59.366978125" size="0.4064" layer="27" ratio="10" rot="R270"/>
 </element>
-<element name="SG2" library="dhgoldberg" package="BUZZER-9MM-PTH" value="BUZZER" x="74.31" y="46.91" rot="R270"/>
-<element name="Q2" library="SparkFun-DiscreteSemi" package="TO-92-AMMO" value="" x="95.25" y="44.5" smashed="yes">
+<element name="Q2" library="SparkFun-DiscreteSemi" library_urn="urn:adsk.eagle:library:514" package="TO-92-AMMO" value="" x="95.25" y="44.5" smashed="yes">
 <attribute name="NAME" x="97.925" y="45.905" size="0.8128" layer="25" ratio="10"/>
 <attribute name="VALUE" x="98.425" y="42.595" size="0.4064" layer="27" ratio="10"/>
 </element>
-<element name="J1" library="SparkFun-Connectors" package="1X05" value="" x="72.15" y="41.2" smashed="yes">
+<element name="J1" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" package="1X05" value="" x="72.15" y="41.2" smashed="yes">
 <attribute name="NAME" x="69.5538" y="40.2788" size="0.8128" layer="25" ratio="10"/>
 <attribute name="VALUE" x="70.88" y="38.025" size="1.27" layer="27"/>
 </element>
@@ -791,13 +818,15 @@ Please make sure your boards conform to these design rules.</description>
 <attribute name="NAME" x="81.155" y="66.345" size="0.889" layer="25" ratio="11" rot="R180"/>
 <attribute name="VALUE" x="83.405" y="68.195" size="0.6096" layer="27" ratio="11" rot="R180"/>
 </element>
+<element name="SG1" library="dhgoldberg" package="BUZZER-9MM-PTH_NEW" value="BUZZER9MM" x="74" y="47" rot="R225"/>
 </elements>
 <signals>
 <signal name="N$2">
 <contactref element="D3" pad="A"/>
 <contactref element="R2" pad="2"/>
-<wire x1="101.805" y1="60.845" x2="101.805" y2="60.89" width="0.6096" layer="1"/>
-<wire x1="101.805" y1="60.89" x2="96.845" y2="65.85" width="0.6096" layer="1"/>
+<wire x1="101.805" y1="60.89" x2="101.805" y2="60.845" width="0.6096" layer="1"/>
+<wire x1="97.243025" y1="63.681971875" x2="99.013028125" y2="63.681971875" width="0.6096" layer="1"/>
+<wire x1="99.013028125" y1="63.681971875" x2="101.805" y2="60.89" width="0.6096" layer="1"/>
 </signal>
 <signal name="SW">
 <contactref element="U1" pad="7"/>
@@ -863,17 +892,14 @@ Please make sure your boards conform to these design rules.</description>
 </signal>
 <signal name="N$5">
 <contactref element="R4" pad="2"/>
-<contactref element="SG2" pad="P$2"/>
-<wire x1="67.095" y1="46.74" x2="68.925" y2="44.91" width="0.6096" layer="1"/>
-<wire x1="68.925" y1="44.91" x2="74.31" y2="44.91" width="0.6096" layer="1"/>
+<contactref element="SG1" pad="P$2"/>
+<wire x1="72.04696875" y1="45.04696875" x2="68.78803125" y2="45.04696875" width="0.6096" layer="1"/>
+<wire x1="68.78803125" y1="45.04696875" x2="67.095" y2="46.74" width="0.6096" layer="1"/>
 </signal>
 <signal name="BUZZ">
-<contactref element="SG2" pad="P$1"/>
 <contactref element="U1" pad="5"/>
 <contactref element="R2" pad="1"/>
-<wire x1="74.681975" y1="52.631978125" x2="72.4" y2="54.913953125" width="0.6096" layer="1"/>
-<wire x1="74.31" y1="48.91" x2="74.681975" y2="49.281975" width="0.6096" layer="1"/>
-<wire x1="74.681975" y1="49.281975" x2="74.681975" y2="52.631978125" width="0.6096" layer="1"/>
+<wire x1="72.4" y1="54.913953125" x2="74.681975" y2="52.631978125" width="0.6096" layer="1"/>
 <wire x1="95.905" y1="60.845" x2="91" y2="65.75" width="0.6096" layer="1"/>
 <wire x1="95.905" y1="60.845" x2="99.005" y2="60.845" width="0.6096" layer="1"/>
 <wire x1="80.5" y1="65.75" x2="79" y2="64.25" width="0.6096" layer="1"/>
@@ -881,6 +907,9 @@ Please make sure your boards conform to these design rules.</description>
 <wire x1="91" y1="65.75" x2="80.5" y2="65.75" width="0.6096" layer="1"/>
 <wire x1="72.4" y1="54.913953125" x2="72.4" y2="63.9" width="0.6096" layer="1"/>
 <wire x1="72.4" y1="63.9" x2="72.75" y2="64.25" width="0.6096" layer="1"/>
+<contactref element="SG1" pad="P$1"/>
+<wire x1="74.681975" y1="52.631978125" x2="74.681975" y2="50.22408125" width="0.6096" layer="1"/>
+<wire x1="74.681975" y1="50.22408125" x2="75.953028125" y2="48.953028125" width="0.6096" layer="1"/>
 </signal>
 <signal name="MOT">
 <contactref element="U1" pad="6"/>
@@ -897,17 +926,15 @@ Please make sure your boards conform to these design rules.</description>
 <signal name="ACC_POW">
 <contactref element="U1" pad="3"/>
 <contactref element="J1" pad="1"/>
-<wire x1="69.5" y1="54.3" x2="69.5" y2="48.3" width="0.6096" layer="1"/>
+<wire x1="69.5" y1="54.3" x2="69.5" y2="47.5" width="0.6096" layer="1"/>
 <wire x1="67.061975" y1="55.171978125" x2="68.628021875" y2="55.171978125" width="0.6096" layer="1"/>
 <wire x1="68.628021875" y1="55.171978125" x2="69.5" y2="54.3" width="0.6096" layer="1"/>
-<wire x1="69.5" y1="48.3" x2="69.5" y2="47.5" width="0.6096" layer="1"/>
-<wire x1="69.5" y1="47.5" x2="70.75" y2="46.25" width="0.6096" layer="1"/>
-<wire x1="70.75" y1="46.25" x2="75.25" y2="46.25" width="0.6096" layer="1"/>
-<wire x1="75.25" y1="46.25" x2="76" y2="45.5" width="0.6096" layer="1"/>
-<wire x1="76" y1="45.5" x2="76" y2="44.5" width="0.6096" layer="1"/>
-<wire x1="74.75" y1="43.25" x2="74.2" y2="43.25" width="0.6096" layer="1"/>
-<wire x1="74.2" y1="43.25" x2="72.15" y2="41.2" width="0.6096" layer="1"/>
-<wire x1="76" y1="44.5" x2="74.75" y2="43.25" width="0.6096" layer="1"/>
+<wire x1="69.5" y1="47.5" x2="70.25" y2="46.75" width="0.6096" layer="1"/>
+<wire x1="70.25" y1="46.75" x2="73" y2="46.75" width="0.6096" layer="1"/>
+<wire x1="73" y1="46.75" x2="74" y2="45.75" width="0.6096" layer="1"/>
+<wire x1="74" y1="43.5" x2="72.15" y2="41.65" width="0.6096" layer="1"/>
+<wire x1="72.15" y1="41.65" x2="72.15" y2="41.2" width="0.6096" layer="1"/>
+<wire x1="74" y1="45.75" x2="74" y2="43.5" width="0.6096" layer="1"/>
 </signal>
 <signal name="N$3">
 <contactref element="M1" pad="P$2"/>
@@ -926,14 +953,12 @@ Please make sure your boards conform to these design rules.</description>
 <contactref element="J1" pad="2"/>
 <wire x1="67.061975" y1="57.711978125" x2="69.038021875" y2="57.711978125" width="0.6096" layer="1"/>
 <wire x1="69.038021875" y1="57.711978125" x2="70.75" y2="56" width="0.6096" layer="1"/>
-<wire x1="74.69" y1="41.2" x2="76.5" y2="43.01" width="0.6096" layer="1"/>
-<wire x1="76.5" y1="43.01" x2="76.51" y2="43.01" width="0.6096" layer="1"/>
-<wire x1="77.25" y1="43.75" x2="76.51" y2="43.01" width="0.6096" layer="1"/>
-<wire x1="70.75" y1="49.25" x2="72.5" y2="47.5" width="0.6096" layer="1"/>
-<wire x1="72.5" y1="47.5" x2="76.5" y2="47.5" width="0.6096" layer="1"/>
-<wire x1="76.5" y1="47.5" x2="77.25" y2="46.75" width="0.6096" layer="1"/>
 <wire x1="70.75" y1="56" x2="70.75" y2="49.25" width="0.6096" layer="1"/>
-<wire x1="77.25" y1="46.75" x2="77.25" y2="43.75" width="0.6096" layer="1"/>
+<wire x1="70.75" y1="49.25" x2="71.75" y2="48.25" width="0.6096" layer="1"/>
+<wire x1="71.75" y1="48.25" x2="73.75" y2="48.25" width="0.6096" layer="1"/>
+<wire x1="73.75" y1="48.25" x2="75.5" y2="46.5" width="0.6096" layer="1"/>
+<wire x1="75.5" y1="46.5" x2="75.5" y2="42.01" width="0.6096" layer="1"/>
+<wire x1="75.5" y1="42.01" x2="74.69" y2="41.2" width="0.6096" layer="1"/>
 </signal>
 <signal name="N$6">
 <contactref element="U1" pad="1"/>
@@ -953,6 +978,21 @@ Please make sure your boards conform to these design rules.</description>
 <note version="6.3" minversion="6.2.2" severity="warning">
 Since Version 6.2.2 text objects can contain more than one line,
 which will not be processed correctly with this version.
+</note>
+<note version="8.2" severity="warning">
+Since Version 8.2, EAGLE supports online libraries. The ids
+of those online libraries will not be understood (or retained)
+with this version.
+</note>
+<note version="8.3" severity="warning">
+Since Version 8.3, EAGLE supports URNs for individual library
+assets (packages, symbols, and devices). The URNs of those assets
+will not be understood (or retained) with this version.
+</note>
+<note version="8.3" severity="warning">
+Since Version 8.3, EAGLE supports the association of 3D packages
+with devices in libraries, schematics, and board files. Those 3D
+packages will not be understood (or retained) with this version.
 </note>
 </compatibility>
 </eagle>
