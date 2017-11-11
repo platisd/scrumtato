@@ -34,7 +34,7 @@ The use cases supported by Scrumtato can be found in the [firmware](https://gith
 From a physical perspective, Scrumtato is comprised of a PCB and a 3D-printed case to protect the electronics as well as make passing around easier and more fun.
 
 ### PCB
-The printed circuit board was designed with [Eagle CAD](https://www.autodesk.com/products/eagle/overview) and the latest `rev. 1` boards were fabricated by [Seeed Fusion](https://www.seeedstudio.com/fusion_pcb.html) and their [2 layer DRU](http://www.seeedstudio.com/document/rar/Seeed_Gerber_Generater_2-layer.zip) to produce the Gerber files. Using the above service you can preview your board, as well as any changes you made, before ordering it and have it nicely packaged and delivered to your address in just a week.
+The printed circuit board was designed with [Eagle CAD](https://www.autodesk.com/products/eagle/overview) and the latest `rev. 2` boards were fabricated by [PCBWay](https://www.pcbway.com/project/shareproject/Scrumtato__Make_daily_standups_agile_again__rev_2_.html). Using the above service you can preview your board, as well as any changes you made, before ordering it and have it nicely packaged and delivered to your address in less than a week.
 
 ### 3D printed cases
 Depending on the how you use Scrumtato, different case should be utilized. When used as a stand-up meeting gadget, it is *probably* not going to be thrown around. Therefore a case from common PLA plastic will work just fine. However, if kids come into the equation a flexible case is strongly suggested, since the gadget will be mishandled and dropped on the floor. After all, this is part of the fun. The flexible version was printed with a [ZYYX+ printer](http://www.zyyx3dprinter.com/), using their proFLEX filament. The PLA version was printed with a [Micro M3D printer](https://printm3d.com/themicro/). The models were sliced with Simplify3D. If you need more information on the specific Simplify3D profiles used, tips on how to print (e.g. when to use support etc) or the source of the models, please contact me.
@@ -43,7 +43,7 @@ Depending on the how you use Scrumtato, different case should be utilized. When 
 * [Scrumtato Flex version](https://github.com/platisd/scrumtato/tree/master/physibles/flex) - To be used as a toy for kids.
 
 ### Components
-* **[Scrumtato PCB](hardware/)** - You can also [order it from OSH Park](https://oshpark.com/shared_projects/GQ4w7Qkz) or [Seeed Studio](https://www.seeedstudio.com/Scrumtato-Make-daily-stand-ups-agile-again-g-1012504)
+* **[Scrumtato PCB](hardware/)** - You can also [order it from PCBWay](https://www.pcbway.com/project/shareproject/Scrumtato__Make_daily_standups_agile_again__rev_2_.html)
 * **Four M3x10 flat head screws** - To mount the board. Longer ones (until M3x40) will also work.
 * **Two M3x20 flat head screws** - To keep the upper and bottom part of the case together. Longer ones (until M3x40) will also work. **Only for the toy/flexible version!**
 * **CR2032 battery** - To power everything up
