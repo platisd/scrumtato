@@ -23,8 +23,7 @@ enum PowerState {
 const unsigned int BUZZER_PIN = PB0;
 const unsigned int MOTOR_PIN = PB1;
 const unsigned int BUTTON_PIN = PB2;
-const unsigned int ACCELEROMETER_IN = PB3;
-const unsigned int ACCELEROMETER_POWER = PB4;
+const unsigned int LED_PIN = PB3;
 
 const unsigned long TURN_DURATION = 60000; // The time in milliseconds that each person can talk
 unsigned long halfOfRemainingTime = TURN_DURATION / 2;
@@ -40,6 +39,20 @@ volatile bool buttonPressed = false;
 const unsigned long remindBeepDuration = 150; // How long in milliseconds we should beep to "stress" the user
 
 PowerState currentState = DEEP_SLEEP; // Start with sleep as the initial state
+
+/**
+      Utility method that turns the LED on
+*/
+void turnLightOn() {
+  digitalWrite(LED_PIN, HIGH);
+}
+
+/**
+      Utility method that turns the LED off
+*/
+void turnLightOff() {
+  digitalWrite(LED_PIN, LOW);
+}
 
 /**
    Vibrate for the specified amount of time (blocking)
@@ -66,12 +79,14 @@ void stopVibrating() {
 }
 
 /**
-   Ring the buzzer for the specified amount of time (blocking)
+   Ring the buzzer for the specified amount of time (blocking) while lighting the LED
    @param duration milliseconds the buzzer will ring
 */
 void ringFor(unsigned long duration) {
   startRinging();
+  turnLightOn();
   delay(duration);
+  turnLightOff();
   stopRinging();
 }
 
@@ -111,20 +126,6 @@ void setupWatchDogTimeoutOneshot(WatchDogTimeout wdt) {
   WDTCR |= _BV(WDIE);
   wdt_reset();  // pat the dog
   currentWdt = wdt;
-}
-
-/**
-   Disables the accelerometer by setting the pin that powers it up to LOW
-*/
-void turnAccelerometerOff() {
-  digitalWrite(ACCELEROMETER_POWER, LOW);
-}
-
-/**
-   Enables the accelerometer by setting the pin that powers it up to HIGH
-*/
-void turnAccelerometerOn() {
-  digitalWrite(ACCELEROMETER_POWER, HIGH);
 }
 
 /**
@@ -171,8 +172,7 @@ void setup() {
   pinMode(BUZZER_PIN, OUTPUT);
   pinMode(MOTOR_PIN, OUTPUT);
   pinMode(BUTTON_PIN, INPUT);
-  pinMode(ACCELEROMETER_IN, INPUT);
-  pinMode(ACCELEROMETER_POWER, OUTPUT);
+  pinMode(LED_PIN, OUTPUT);
   setupChangeInterrupt();
 }
 
