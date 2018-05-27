@@ -24,17 +24,19 @@ Scrumtato was initially conceived as a toy for kids (or grown ups, no judging) a
 
 Specifically, the watchdog timer is triggered faster and the buzzer beeps when 5% of the remaining time is depleted, therefore more frequently compared to the stand-up scenario. Additionally, the on-board analog accelerometer is utilized to determine if a player does not pass the ball fast enough. In that case, a faster countdown is initiated and the ball must be passed in a couple of seconds otherwise it "explodes" in the hands of the one that was delaying the game. This increases the suspense and the pace of the game.
 
+The Hot Potato use case is not supported since `rev.3` as the accelerometer was removed. If you want to download that specific version then do `git checkout -b hw_rev.2`.
+
 ## Software
 The use cases supported by Scrumtato can be found in the [firmware](https://github.com/platisd/scrumtato/tree/master/firmware) directory.
 
 * [Standup Potato](https://github.com/platisd/scrumtato/tree/master/firmware/StandupPotato): The way to make daily stand-ups agile again
-* [Hot Potato](https://github.com/platisd/scrumtato/tree/master/firmware/HotPotato): A modern and suspenseful take on the classic Hot Potato game
+* [Hot Potato](https://github.com/platisd/scrumtato/tree/master/firmware/HotPotato): A modern and suspenseful take on the classic Hot Potato game, supported up to `rev.2` hardware.
 
 ## Hardware
 From a physical perspective, Scrumtato is comprised of a PCB and a 3D-printed case to protect the electronics as well as make passing around easier and more fun.
 
 ### PCB
-The printed circuit board was designed with [Eagle CAD](https://www.autodesk.com/products/eagle/overview) and the latest `rev. 2` boards were fabricated by [PCBWay](https://www.pcbway.com/project/shareproject/Scrumtato__Make_daily_standups_agile_again__rev_2_.html). Using the above service you can preview your board, as well as any changes you made, before ordering it and have it nicely packaged and delivered to your address in less than a week.
+The printed circuit board was designed with [Eagle CAD](https://www.autodesk.com/products/eagle/overview) and the latest `rev. 3` boards were fabricated by [PCBWay](https://www.pcbway.com/project/shareproject/Scrumtato__Make_daily_standups_agile_again__rev_3_.html). Using the above service you can preview your board, as well as any changes you made, before ordering it and have it nicely packaged and delivered to your address in less than a week.
 
 ### 3D printed cases
 Depending on the how you use Scrumtato, different case should be utilized. When used as a stand-up meeting gadget, it is *probably* not going to be thrown around. Therefore a case from common PLA plastic will work just fine. However, if kids come into the equation a flexible case is strongly suggested, since the gadget will be mishandled and dropped on the floor. After all, this is part of the fun. The flexible version was printed with a [ZYYX+ printer](http://www.zyyx3dprinter.com/), using their proFLEX filament. The PLA version was printed with a [Micro M3D printer](https://printm3d.com/themicro/). The models were sliced with Simplify3D. If you need more information on the specific Simplify3D profiles used, tips on how to print (e.g. when to use support etc) or the source of the models, please contact me.
@@ -43,16 +45,13 @@ Depending on the how you use Scrumtato, different case should be utilized. When 
 * [Scrumtato Flex version](https://github.com/platisd/scrumtato/tree/master/physibles/flex) - To be used as a toy for kids.
 
 ### Components
-* **[Scrumtato PCB](hardware/)** - You can also [order it from PCBWay](https://www.pcbway.com/project/shareproject/Scrumtato__Make_daily_standups_agile_again__rev_2_.html)
+* **[Scrumtato PCB](hardware/)** - You can also [order it from PCBWay](https://www.pcbway.com/project/shareproject/Scrumtato__Make_daily_standups_agile_again__rev_3_.html)
 * **Four M3x10 flat head screws** - To mount the board. Longer ones (until M3x40) will also work.
 * **Two M3x20 flat head screws** - To keep the upper and bottom part of the case together. Longer ones (until M3x40) will also work. **Only for the toy/flexible version!**
 * **CR2032 battery** - To power everything up
 * **CR2032 battery holder** - To keep the battery in place. Get the through-hole version.
 * **ATtiny85-20PU** - If you only want to use it during stand-up meetings, then an **ATtiny25-20PU** will suffice.
-* **DIP-8 socket** - Optional, but will probably make your life easier if you need to remove the microcontroller.
-* **GY-61 accelerometer module** - Based on the ADXL335 chip. Try to get one that has its pins unsoldered.
-* **5-pin angled male header** - Optional, unless you use an accelerometer which needs to be placed vertically relative to the board.
-* **5-pin female header** - Optional, unless you use an accelerometer and need to remove it.
+* **DIP-8 socket** - Optional, but will probably make your life easier if you need to remove the microcontroller in order to reprogram it.
 * **9mm Buzzer** - They are not the most common but take up less space. I might consider replacing them in the future with something easier to source.
 * **22Ω 1206 resistor** - Used for the buzzer. Other low valued resistors will probably work as well.
 * **SMD vibrating motor** - To make Scrumtato vibrate. The board is modeled after Sanyo NRS-2574 but all other models that fit the dimensions will work.
@@ -63,6 +62,10 @@ Depending on the how you use Scrumtato, different case should be utilized. When 
 * **BC547 NPN transistor** - To control the vibration motor.
 * **1KΩ 1206 resistor** - To drive the transistor.
 * **Two 10KΩ 1206 resistors** - Used as pull ups. One for the microcontroller's reset pin and the other for the tactile switch.
+* **Hot Potato toy** - Optionally supported up to hardware `rev.2`
+  * **GY-61 accelerometer module** - Based on the ADXL335 chip. Try to get one that has its pins unsoldered.
+  * **5-pin angled male header** - To solder on the GY-61 module in order to mount it vertically on the board.
+  * **5-pin female header** - So you do not to have to solder the GY-61 module.
 
 ## Articles
 [Scrumtato: Make daily stand-ups agile again](https://platis.solutions/blog/2017/06/12/scrumtato-make-daily-stand-ups-agile-again/)
