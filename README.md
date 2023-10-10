@@ -4,7 +4,7 @@ Scrumtato is an ATtiny85-based gadget to keep overly passionate developers from 
 ## About Scrumtato
 During our daily stand-up meetings (SCRUM), as we are a team full of talented and passionate developers, we just love to talk too much. This stretches our meeting and keeps us from getting the most out of our working hours. To solve this problem, here comes **Scrumtato: A gadget to make daily stand-ups agile again!**
 
-![scrumtatos](https://platis.solutions/blog/wp-content/uploads/2017/06/scrumtato_featured.jpg)
+![scrumtatos](https://platis.solutions/assets/images/scrumtato_featured.jpg)
 
 ## How does it work
 Operating the Scrumtato is simple!
